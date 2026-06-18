@@ -1,171 +1,103 @@
-# 🔐 Phishing Simulation & Credential Analysis Platform
+# Training Awareness Demo Dashboard
 
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
-![Flask](https://img.shields.io/badge/Framework-Flask-black)
+![Framework](https://img.shields.io/badge/Framework-Flask-black)
 ![Database](https://img.shields.io/badge/Database-SQLite-green)
-![Status](https://img.shields.io/badge/Project-Educational-orange)
+![Mode](https://img.shields.io/badge/Mode-Safe%20Demo-orange)
 
----
+## Overview
 
-## 📌 Project Overview
+This project is a safe cybersecurity awareness demo built with Flask.
 
-This project is a **Phishing Simulation Platform** developed using **Python Flask**.
-It simulates a login environment to demonstrate how phishing attacks can capture user interaction data.
+It keeps the original two-step page flow and dashboard style, but it does not store typed email values, second-step input, passwords, real user tracking data, or live geolocation data. The dashboard is powered entirely by synthetic training records.
 
-The system collects and analyzes:
+## Safe Behavior
 
-* login credentials
-* user device information
-* IP addresses
-* browser and OS
-* interaction time
+- The public pages still render and submit normally.
+- Typed values from the public pages are ignored after validation.
+- The app generates synthetic demo sessions for awareness training analytics.
+- Dashboard records are labeled as training/demo data.
+- API responses never expose any field named `password`.
 
-All captured information is displayed in a **real-time monitoring dashboard**.
+## Features
 
-This project was developed for **cybersecurity awareness and educational purposes**.
+- Google-style two-step training flow
+- Synthetic training session generation
+- SQLite-backed mock analytics
+- Dashboard statistics cards
+- Session filters
+- Chart.js charts
+- Audit log feed
+- Mobile-responsive dashboard
 
----
+## Project Structure
 
-## 🧠 Key Features
-
-✔ Realistic Google-style login page
-✔ Email or phone validation
-✔ Credential capture simulation
-✔ User device detection
-✔ Browser & OS identification
-✔ IP tracking
-✔ Time spent on page tracking
-✔ Live dashboard monitoring
-✔ JSON API for collected data
-
----
-
-## 🖥 Dashboard Preview
-
-The dashboard displays captured information including:
-
-* Username / Email
-* Password
-* IP Address
-* Operating System
-* Browser
-* Time spent
-* Timestamp
-
-Example dashboard endpoint:
-
-http://127.0.0.1:5000/results
-
----
-
-## 🏗 Project Architecture
-
+```text
 project/
-│
-├── app.py                # Main Flask application
-├── database.db           # SQLite database
-│
-├── templates/
-│   ├── login_email.html
-│   ├── login_password.html
-│   └── results.html
-│
-├── requirements.txt
-├── .gitignore
-└── README.md
+|-- app.py
+|-- requirements.txt
+|-- README.md
+`-- templates/
+    |-- login_email.html
+    |-- login_password.html
+    `-- results.html
+```
 
----
+## Run Locally
 
-## ⚙ Installation
+1. Install dependencies:
 
-### 1️⃣ Clone Repository
+```bash
+pip install -r requirements.txt
+```
 
-git clone https://github.com/YOUR_USERNAME/phishing-simulation.git
-cd phishing-simulation
+2. Start the app:
 
----
-
-### 2️⃣ Install Dependencies
-
-pip install flask user-agents
-
----
-
-### 3️⃣ Run the Application
-
+```bash
 python app.py
+```
 
-Server will start on:
+3. Open:
 
-http://127.0.0.1:5000
+- Public flow: `http://127.0.0.1:5000/`
+- Dashboard: `http://127.0.0.1:5000/results`
 
----
+## API Endpoints
 
-## 📊 Monitoring Dashboard
+### `GET /api/stats`
 
-Open:
+Returns aggregate demo analytics:
 
-http://127.0.0.1:5000/results
+- `total_sessions`
+- `today_sessions`
+- `week_sessions`
+- `mobile_count`
+- `desktop_count`
+- `top_browsers`
+- `top_operating_systems`
+- `top_countries`
+- `visitors_per_day`
 
-The dashboard displays:
+### `GET /api/data`
 
-| Data       | Description            |
-| ---------- | ---------------------- |
-| Username   | Email or phone entered |
-| Password   | Submitted password     |
-| IP Address | User network address   |
-| Device     | Mobile or Desktop      |
-| Browser    | User browser           |
-| Time Spent | Time on page           |
-| Timestamp  | Login attempt time     |
+Returns synthetic demo session rows. Supports optional filters:
 
----
+- `search`
+- `ip`
+- `device`
+- `country`
+- `date`
 
-## 🔗 API Endpoint
+### `GET /api/audit-logs`
 
-The system provides a JSON API for data extraction:
+Returns recent dashboard and API activity logs for the demo.
 
-/data/json
+## Notes
 
-Example output:
+- The app uses `/tmp/database.db` so it can run in environments like Vercel.
+- Existing legacy tables are preserved for compatibility.
+- The synthetic dashboard data is seeded automatically on first run.
 
-{
-"rows": [...],
-"stats": {...},
-"current_time": "2026-03-05T21:30:00"
-}
+## License
 
----
-
-## 🎓 Educational Purpose
-
-This project was created **strictly for educational and cybersecurity training purposes**.
-
-It demonstrates:
-
-* phishing techniques
-* credential harvesting
-* user behavior analysis
-* cybersecurity awareness
-
-⚠ Do not use this project for illegal activities.
-
----
-
-## 👨‍💻 Authors
-
-Abdulhaq Hussain Ali
-Aya Ali Mustafa
-Ali Bashar Muhammad
-
----
-
-## 📜 License
-
-This project is provided for **educational and research purposes only**.
-
----
-
-## ⭐ Support
-
-If you found this project helpful, consider giving it a ⭐ on GitHub.
+Educational and research use only.
